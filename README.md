@@ -18,7 +18,7 @@ zookeeper-server-start config/zookeeper.properties
 kafka-server-start config/server.properties
 ```
 ---
-* Instlal the [PyKafka](https://pykafka.readthedocs.io/en/latest/) package. You can install PyKafka from PyPI with
+* Install the [PyKafka](https://pykafka.readthedocs.io/en/latest/) package. You can install PyKafka from PyPI with
 ```
 pip install pykafka
 ```
@@ -44,4 +44,4 @@ python app.py
 * ``@app.route('/new_message/<topicname>')`` - Route for adding new messages to a particular topic. The posts requests are sent via the ``/templates/new_message.html`` file, and sent to the route using XMLHttpRequest (AJAX).
 
 ### Database
-Simple [Sqlite3](https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/) database. Passwords are stored in plain-text because this is only a simple example.
+Simple [Sqlite3](https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/) database (passwords are stored in plain-text because this is only a basic example).
