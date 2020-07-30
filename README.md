@@ -38,10 +38,10 @@ python app.py
 * Navigate to localhost port 5001 and the setup route on locahost in your browser: [http://127.0.0.1:5001/setup](http://127.0.0.1:5001/setup). This will initialize the project with a few default values
 
 ### Routes
-* ``@app.route('/')`` - A route which leads to the index page
 * ``@app.route('/setup/')`` - Setup route that creates a Sqlite3 database and inserts some default values. Launch this route on first use or if the values need to be re-initialized
-* ``@app.route('/getmessages/<topicname>')`` - Route used for sending messages to a particular topic. Accepts a topic name as the url parameter
-* ``@app.route('/new_message/<topicname>')`` - Route for adding new messages to a particular topic
+* ``@app.route('/')`` - A route which leads to the index page. Here we initialize the kafka client and use it to pull a list of topics from the server. The data is converted from byte format to utf-8 format, stored in a list called topics_list. The template is then rendered along with the data.
+* ``@app.route('/getmessages/<topicname>')`` - Route used for displaying messages that belong to a particular topic. Accepts a topic name as the url parameter.
+* ``@app.route('/new_message/<topicname>')`` - Route for adding new messages to a particular topic. The posts requests are sent via the ``/templates/new_message.html`` file, and sent to the route using XMLHttpRequest (AJAX).
 
 ### Database
 Simple [Sqlite3](https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/) database. Passwords are stored in plain-text because this is only a simple example.
