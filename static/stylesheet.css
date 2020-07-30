@@ -1,0 +1,30 @@
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Cambria', 'Georgia', serif;
+	font-weight: bold;
+}
+a {
+    font-weight: bold;
+}
+a:hover {
+    text-decoration: none;
+}
+
+li {list-style-type: none;padding-left: 0px;}
+
+ul {
+    padding-left: 0px;
+}
+.spacer-20 { height: 20px; }
+
+.messageform {
+    max-width: 400px;
+    font-size: 0.9em;
+    margin: 0 auto;
+}
+
+.message {    
+	border-radius: 3px;
+    padding: 5px 20px;
+    margin: 10px 0px;
+    box-shadow: 1px 1px 11px 0px #00000033;
+}

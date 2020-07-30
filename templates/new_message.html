@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Messages
+    </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="spacer-20"></div>
+        
+        <h4 class="text-center">Send Message To {{ topicname }}</h4>
+        
+        <div class="spacer-20"></div>
+
+        <div class="box">
+            <form class="messageform" id="messageform">
+                <input type="hidden" value="{{ topicname }}" id="topicname_input">
+                
+                <div id="response-container"></div>
+
+                <div class="form-row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="user_id">Student ID</label>
+                            <input type="text" name="user_id" id="user_id" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea type="text" name="message" id="message" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-info" type="submit" id="submit">Send Message</button>
+                </div>
+            </form>  
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+
+            const response_container = document.getElementById("response-container");
+            const messageform = document.getElementById("messageform");
+            const user_id = document.getElementById("user_id");
+            const password = document.getElementById("password");
+            const message = document.getElementById("message");
+
+            messageform.addEventListener('submit', function(event) {
+                event.preventDefault();
+                response_container.innerHTML = '';
+                
+                var xhr = new XMLHttpRequest();
+                var formData = new FormData();
+
+                formData.append('user_id', user_id.value);
+                formData.append('password', password.value);
+                formData.append('message', message.value);
+
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+
+                        function showResponse(type, message) {
+                            response_container.innerHTML = `
+                                <div class="alert alert-${type} text-center">
+                                    ${message}
+                                </div>
+                            `;
+                        }
+
+                        if(this.responseText == 'true') {
+                            showResponse('success', 'Your message has been sent!');
+                            message.value = '';
+                        } else if (this.responseText == 'credentials') {
+                            showResponse('danger', 'The username/password you entered is incorrect.');
+                        } else {
+                            showResponse('danger', 'An error occured. Please try again later.');
+                        }
+                    }
+                };
+                
+                xhr.open("POST", "/send_message/" + topicname_input.value);
+                xhr.send(formData);
+            });
+        }
+    </script>
+
+</body>
+</html>

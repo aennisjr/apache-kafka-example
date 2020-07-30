@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {{ title }}
+    </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+</head>
+<body>
+
+    <div class="spacer-20"></div>
+
+    <div class="container">
+        <h1>Topics</h1>
+        {% if topics: %}
+        <ul>
+            {% for t in topics %}
+                <li><a href="/getmessages/{{ t }}">{{ t }}</a> &nbsp; <a href="/new_message/{{ t }}" class="text-danger">Send Message</a></li>
+            {% endfor %}
+        </ul>
+        {% else: %}
+            <p>No topics have been created as yet.</p>
+            <a href="/setup">Run Setup</a>
+        {% endif %}
+
+    </div><!-- container -->
+</body>
+</html>
