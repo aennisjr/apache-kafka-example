@@ -2,6 +2,11 @@
 A really simple example of how to use Apache Kafka via the PyKafka package.
 
 Submitted in partial fulfillment of the requirements for the course CBD2204 Big Data Strategies (Summer 2020 - Lambton College).
+#### Group
+* Gayathri Sasidharan
+* Elizebeth Shiju
+* Kalhaar Savaj
+* Bhargava Muralidharan
 
 ### Windows Installation Instructions
 
